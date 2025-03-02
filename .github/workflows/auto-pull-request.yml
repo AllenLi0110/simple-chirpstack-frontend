@@ -1,0 +1,68 @@
+name: Create pull request on push to branch fix/feat
+
+on:
+  push:
+    branches:
+      - "feat/*"
+      - "fix/*"
+
+jobs:
+  create_pull_request:
+    name: Create Pull Request
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check labels if branch is feat/fix
+        id: pr_label
+        run: |
+          PULL_REQUEST_NAME=""
+          if [[ "${{ github.ref }}" == "refs/heads/feat/"* ]]; then
+            LABEL="feature"
+            PULL_REQUEST_NAME="feat:"
+          elif [[ "${{ github.ref }}" == "refs/heads/fix/"* ]]; then
+            LABEL="bug"
+            PULL_REQUEST_NAME="fix:"
+          fi
+          echo "::set-output name=label::$LABEL"
+          echo "::set-output name=pull_request_name::$PULL_REQUEST_NAME"
+          export TITLE="${{ github.event.head_commit.message }}"
+          export TITLE=${TITLE//fix:/}
+          export TITLE=${TITLE//feat:/}
+          export TITLE=${TITLE//hotfix:/}
+          export TITLE=${TITLE//feature:/}
+          export TITLE=${TITLE//chore:/}
+          echo ::set-output name=title::$TITLE
+
+      - name: Get current branch
+        id: get_branch
+        run: echo ::set-output name=short_ref::${GITHUB_REF#refs/*/}
+
+      - name: Create Pull Request
+        id: create_pr
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          base: main
+          branch: ${{steps.get_branch.outputs.short_ref}}
+          assignees: ${{ github.actor }}
+          reviewers: "kerwin-jhong-io,Edai,AllenLiDeveloper"
+          draft: true
+          body: "# Pull Request\n\n## Overview\n\nPlease provide a concise overview of the updates you're proposing. This should include:\n- a brief description of the implemented changes\n- the issue(s) they address.\n\nExplain the rationale behind these changes and any relevant background information. Additionally, list any external dependencies introduced by your changes.\n\n## Linked Issues on Jira\n\n- [Please list and link related issues here]\n\n## Change Category\n\n- [x] Bug Fix – A change that resolves an identified issue.\n- [x] New Feature – A change that introduces new functionality.\n- [x] Breaking Changes – A significant change that may have wide-ranging effects.\n\n## Verification and Testing\n\nDescribe the methods you used to test your changes. \nInclude any steps for replication or conditions that were necessary for testing.\nDid you include Unitary Tests? \n\n## Compliance and Quality Assurance\n\n- [x] I have adhered to the coding standards of this project.\n- [x] I have conducted a thorough self-review of my contributed code.\n- [x] I have made efforts to comment on my code, particularly in areas that may be difficult to understand.\n- [x] My changes do not introduce any new warnings.\n- [x] All unit tests remain successful with my changes.\n- [x] Any related changes have been appropriately merged and communicated in downstream modules.\n- [x] I have verified and corrected any spelling errors in my code."
+
+        run: |
+          gh pr create \
+          --repo ${{ github.repository }} \
+          --base "${{ env.base }}" \
+          --head "${{ env.branch }}" \
+          --label "${{ steps.pr_label.outputs.label }}" \
+          --title "${{ steps.pr_label.outputs.pull_request_name }} IP-### - ${{ steps.pr_label.outputs.title }}" \
+          --body "${{ env.body }}" \
+          --reviewer "${{ env.reviewers }}" \
+          --assignee "${{ env.assignees }}" \
+          --draft
