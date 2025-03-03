@@ -67,7 +67,7 @@ jobs:
             --base "main" \
             --head "${{ steps.pr_metadata.outputs.branch }}" \
             --label "${{ steps.pr_metadata.outputs.label }}" \
-            --title "${{ steps.pr_metadata.outputs.prefix }} IP-### - ${{ steps.pr_metadata.outputs.title }}" \
+            --title "${{ steps.pr_metadata.outputs.prefix }} SC-### - ${{ steps.pr_metadata.outputs.title }}" \
             --body "${{ env.PR_BODY }}" \
             --reviewer "AllenLi0110" \
             --assignee "${{ github.actor }}" \
