@@ -29,6 +29,7 @@ A simple frontend application for interacting with ChirpStack, a LoRaWAN Network
 |  ├── App.vue
 |  ├── main.ts
 |  └── style.css
+├── .prettierrc
 ├── package.json
 ├── README.md
 └── vite.config.ts

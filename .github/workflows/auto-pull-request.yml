@@ -3,9 +3,9 @@ name: Create pull request on push to branch fix/feat
 on:
   push:
     branches:
-      - "feat/*"
-      - "fix/*"
-      - "refactor/*"
+      - 'feat/*'
+      - 'fix/*'
+      - 'refactor/*'
 
 jobs:
   create_pull_request:
@@ -41,6 +41,7 @@ jobs:
           echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
           PR_BODY: |
