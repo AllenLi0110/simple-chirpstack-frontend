@@ -2,15 +2,14 @@
 
 ## Summary
 
-A brief description of the changes made in this PR.
+Please provide a summary of your changes.
 
-## Jira Issue
+## Jira Reference
 
-- SC-XX [Link to Jira issue]
+- SC-XXX [Link to Jira issue]
 
-## Change Category
+## Change Type
 
-- [x] Bug Fix
-- [x] Feature
-- [x] Refactor
-- [x] Breaking Changes
+- [x] Bug Fix - Resolves an existing issue or error
+- [x] New Feature - Adds new functionality
+- [x] Refactor - Improves code structure without changing behavior
