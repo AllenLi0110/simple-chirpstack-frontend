@@ -53,7 +53,7 @@ jobs:
 
             ## Jira Reference
 
-            - SC-XXX
+            - SC-XXX [Link to Jira issue]
 
             ## Change Type
 
