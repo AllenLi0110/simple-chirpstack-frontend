@@ -1,6 +1,12 @@
 <template>
-  <div>Dashboard</div>
-  <div>Description</div>
+  <MainHeader>
+    <template #title>
+      <div>Dashboard</div>
+    </template>
+    <template #description> </template>
+  </MainHeader>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import MainHeader from '@/components/MainHeader.vue';
+</script>

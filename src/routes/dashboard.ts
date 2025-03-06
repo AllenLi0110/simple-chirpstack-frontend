@@ -6,11 +6,13 @@ const dashboardRouter: RouteRecordRaw[] = [
     component: () => import('@/layouts/AppLayout.vue'),
     meta: {
       authenticated: true,
-      breadcrumbs: {
-        title: 'dashboards',
-        name: 'Dashboard.Main',
-        changeName: true
-      }
+      breadcrumbs: [
+        {
+          title: 'dashboards',
+          name: 'Dashboard.Main',
+          changeName: true
+        }
+      ]
     },
     children: [
       {
