@@ -18,7 +18,7 @@ A simple frontend application for interacting with ChirpStack, a LoRaWAN Network
 |  ├── helpers
 |  ├── layouts
 |  ├── models
-|  ├── routers
+|  ├── routes
 |  ├── stores
 |  ├── tests
 |  ├── typings
