@@ -1,10 +1,10 @@
-import { defineConfig } from 'vite';
 import { configDefaults } from 'vitest/config';
+import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'url';
-import vue from '@vitejs/plugin-vue';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
+import vue from '@vitejs/plugin-vue';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -19,11 +19,11 @@ export default defineConfig({
       dts: 'src/typings/auto-imports.d.ts',
       resolvers: [NaiveUiResolver()]
     }),
+    vue(),
     Components({
       dts: 'src/typings/components.d.ts',
       resolvers: [NaiveUiResolver()]
-    }),
-    vue()
+    })
   ],
   server: {
     proxy: {

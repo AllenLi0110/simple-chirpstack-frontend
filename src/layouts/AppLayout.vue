@@ -17,7 +17,8 @@
           <n-menu :options="menuOptions" />
         </n-space>
       </n-layout-sider>
-      <n-layout embedded class="content-layout">
+      <n-layout class="content-layout" embedded>
+        <main-breadcrumb></main-breadcrumb>
         <router-view></router-view>
       </n-layout>
     </n-layout>
@@ -35,6 +36,21 @@ const menuOptionItems: MenuItem[] = [
     label: 'Dashboard',
     routeName: 'Dashboard.Main',
     icon: '/images/dashboardLogo.png'
+  },
+  {
+    label: 'Device Profiles',
+    routeName: 'DeviceProfiles.Main',
+    icon: '/images/deviceProfilesLogo.png'
+  },
+  {
+    label: 'Gateways',
+    routeName: 'Gateways.Main',
+    icon: '/images/gatewaysLogo.png'
+  },
+  {
+    label: 'Applications',
+    routeName: 'Applications.Main',
+    icon: '/images/applicationsLogo.png'
   }
 ];
 
