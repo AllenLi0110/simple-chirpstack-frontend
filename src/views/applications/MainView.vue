@@ -1,7 +1,7 @@
 <template>
   <MainHeader>
     <template #title>
-      <div>Dashboard</div>
+      <div>Applications</div>
     </template>
     <template #description> </template>
   </MainHeader>

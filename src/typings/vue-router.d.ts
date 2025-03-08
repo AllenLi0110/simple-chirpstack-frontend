@@ -5,7 +5,7 @@ import 'vue-router';
 type Breadcrumb = {
   title: string;
   name: string;
-  changeName?: boolean;
+  breadcrumbName?: boolean;
 };
 
 type PageAction = {
@@ -18,7 +18,7 @@ declare module 'vue-router' {
   interface RouteMeta {
     authenticated?: boolean;
     title?: string;
-    breadcrumbs?: Breadcrumb[];
+    breadcrumbs?: Breadcrumb;
     pageAction?: PageAction;
   }
 }

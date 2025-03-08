@@ -4,6 +4,9 @@ import {
   type RouteRecordRaw
 } from 'vue-router';
 import { dashboardRouter } from './dashboard';
+import { gatewaysRouter } from './gateways';
+import { deviceProfilesRouter } from './device-profiles';
+import { applicationsRouter } from './applications';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,10 +15,10 @@ const routes: Array<RouteRecordRaw> = [
       name: 'Dashboard.Main'
     },
     children: [
-      ...dashboardRouter
-      // ...applicationsRouter,
-      // ...deviceProfilesRouter,
-      // ...gatewaysRouter
+      ...dashboardRouter,
+      ...applicationsRouter,
+      ...deviceProfilesRouter,
+      ...gatewaysRouter
     ]
   }
 ];

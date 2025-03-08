@@ -1,9 +1,12 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-const dashboardRouter: RouteRecordRaw[] = [
+const MockAppLayout = { template: '<div><slot></slot></div>' };
+const MockMainView = { template: '<div>Dashboard</div>' };
+
+export const mockDashboardRoute: RouteRecordRaw[] = [
   {
-    path: '/dashboards',
-    component: () => import('@/layouts/AppLayout.vue'),
+    path: '/dashboard',
+    component: MockAppLayout,
     meta: {
       authenticated: true,
       breadcrumbs: {
@@ -15,10 +18,8 @@ const dashboardRouter: RouteRecordRaw[] = [
       {
         path: '',
         name: 'Dashboard.Main',
-        component: () => import('@/views/dashboard/MainView.vue')
+        component: MockMainView
       }
     ]
   }
 ];
-
-export { dashboardRouter };

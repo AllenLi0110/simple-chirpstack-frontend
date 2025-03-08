@@ -8,7 +8,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    MainHeader: typeof import('./../components/MainHeader.vue')['default']
+    MainBreadcrumb: typeof import('./../components/breadcrumb/MainBreadcrumb.vue')['default']
+    MainHeader: typeof import('./../components/header/MainHeader.vue')['default']
+    NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
+    NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem']
+    NButton: typeof import('naive-ui')['NButton']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NDialogProvider: typeof import('naive-ui')['NDialogProvider']
     NLayout: typeof import('naive-ui')['NLayout']
