@@ -15,11 +15,11 @@ export const useBreadcrumbStore = defineStore('breadcrumb', {
       switch (breadcrumbName) {
         case 'Dashboard.Main':
           return state.breadcrumbs.dashboardName;
-        case 'Applications.ApplicationId':
+        case 'Applications.Main':
           return state.breadcrumbs.applicationName;
-        case 'Gateways.GatewayId':
+        case 'Gateways.Main':
           return state.breadcrumbs.gatewayName;
-        case 'DeviceProfiles.DeviceProfileId':
+        case 'DeviceProfiles.Main':
           return state.breadcrumbs.deviceProfileName;
         default:
           return `-`;

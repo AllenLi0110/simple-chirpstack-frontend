@@ -10,16 +10,12 @@
         <n-breadcrumb-item>
           <template v-if="item.meta.breadcrumbs.breadcrumbName">
             <RouterLink :to="{ name: item.meta.breadcrumbs.name }">
-              {{
-                breadcrumbStore.breadcrumbName(
-                  item.meta.breadcrumbs.name.toString()
-                )
-              }}
+              {{ breadcrumbStore.breadcrumbName(item.meta.breadcrumbs.name) }}
             </RouterLink>
           </template>
           <template v-else>
-            <RouterLink :to="{ name: item.meta.breadcrumbs?.name }">
-              {{ item.meta.breadcrumbs?.title }}
+            <RouterLink :to="{ name: item.meta.breadcrumbs.name }">
+              {{ item.meta.breadcrumbs.title }}
             </RouterLink>
           </template>
         </n-breadcrumb-item>
@@ -30,7 +26,7 @@
 
 <script setup lang="ts">
 import { RouterLink, useRoute } from 'vue-router';
-import { useBreadcrumbStore } from '../stores/breadcrumb-store';
+import { useBreadcrumbStore } from '../../stores/breadcrumb-store';
 
 const route = useRoute();
 const breadcrumbStore = useBreadcrumbStore();
