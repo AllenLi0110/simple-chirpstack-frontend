@@ -13,12 +13,12 @@ vi.mock('@/views/dashboard/MainView.vue', () => ({
 }));
 vi.mock('@/views/device-profiles/MainView.vue', () => ({
   default: {
-    template: '<div>Device Profile Main View</div>'
+    template: '<div>Device Profiles Main View</div>'
   }
 }));
 vi.mock('@/views/gateways/MainView.vue', () => ({
   default: {
-    template: '<div>Gateway Main View</div>'
+    template: '<div>Gateways Main View</div>'
   }
 }));
 vi.mock('@/views/applications/MainView.vue', () => ({
