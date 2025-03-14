@@ -3,7 +3,7 @@
     <template v-for="(item, index) in route.matched" :key="index">
       <template v-if="index === 0">
         <n-breadcrumb-item>
-          <RouterLink :to="{ name: 'Dashboard.Main' }"> ChirpStack </RouterLink>
+          <RouterLink :to="{ name: route.name }"> ChirpStack </RouterLink>
         </n-breadcrumb-item>
       </template>
       <template v-if="item.meta.breadcrumbs">
