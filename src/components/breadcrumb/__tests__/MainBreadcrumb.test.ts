@@ -7,33 +7,82 @@ import {
 import { createPinia, type Pinia } from 'pinia';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { mockDashboardRoute } from '../__mocks__/breadcrumb.mock';
+import {
+  mockApplicationRoute,
+  mockBreadcrumbName,
+  mockDashboardRoute,
+  mockDeviceProfileRoute,
+  mockGatewayRoute
+} from '../__mocks__/breadcrumb.mock';
 import MainBreadcrumb from '../MainBreadcrumb.vue';
 
-describe('MainBreadcrumb - Dashboard', () => {
+const routes = [
+  { name: 'Dashboard', route: mockDashboardRoute },
+  { name: 'DeviceProfile', route: mockDeviceProfileRoute },
+  { name: 'Gateway', route: mockGatewayRoute },
+  { name: 'Application', route: mockApplicationRoute }
+];
+const getRoutePath = (name: string): string => {
+  switch (name) {
+    case 'Dashboard':
+      return '/dashboard';
+    case 'DeviceProfile':
+      return '/device-profiles';
+    case 'Gateway':
+      return '/gateways';
+    case 'Application':
+      return '/applications';
+    default:
+      return '/applications';
+  }
+};
+
+describe('MainBreadcrumb - Routes', () => {
   let router: Router;
   let pinia: Pinia;
 
   beforeEach(() => {
+    pinia = createPinia();
     router = createRouter({
       history: createWebHistory(),
-      routes: mockDashboardRoute
+      routes: [
+        ...mockDashboardRoute,
+        ...mockDeviceProfileRoute,
+        ...mockGatewayRoute,
+        ...mockApplicationRoute
+      ]
     });
-    pinia = createPinia();
   });
 
-  it('render dashboard breadcrumb items correctly', async () => {
-    await router.push('/dashboard');
-    await router.isReady();
+  routes.forEach(({ name, route }) => {
+    it(`renders ${name} breadcrumb items correctly`, async () => {
+      await router.push(getRoutePath(name));
+      await router.isReady();
 
-    const wrapper = mount(MainBreadcrumb, {
-      global: {
-        plugins: [router, pinia]
+      const wrapper = mount(MainBreadcrumb, {
+        global: {
+          plugins: [router, pinia]
+        }
+      });
+
+      const routerLink = wrapper.findComponent(RouterLink);
+      let breadcrumbMeta: any;
+      const routeName = name;
+      if (routeName === 'Dashboard') {
+        const [{ meta }] = route;
+        breadcrumbMeta = meta;
+      } else {
+        const [{ children }] = route;
+        const [{ meta }] = children || [];
+        breadcrumbMeta = meta;
       }
+
+      const { name: breadcrumbName } = breadcrumbMeta.breadcrumbs;
+      expect(routerLink.exists()).toBe(true);
+      expect(routerLink.text().trim()).toBe(mockBreadcrumbName);
+      expect(routerLink.props('to')).toEqual({
+        name: breadcrumbName
+      });
     });
-    const routerLink = wrapper.findComponent(RouterLink);
-    expect(routerLink.exists()).toBe(true);
-    expect(routerLink.text().trim()).toBe('ChirpStack');
-    expect(routerLink.props('to')).toEqual({ name: 'Dashboard.Main' });
   });
 });
