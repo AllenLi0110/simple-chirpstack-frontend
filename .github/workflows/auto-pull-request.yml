@@ -43,7 +43,7 @@ jobs:
       - name: Create Pull Request
         continue-on-error: true
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PROJEN_GITHUB_TOKEN }}
           PR_BODY: |
             # Pull Request
 
